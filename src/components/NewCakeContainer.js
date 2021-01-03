@@ -1,12 +1,15 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {connect} from 'react-redux'
-import {buyIceCream} from  '../redux'
+import {buyCake} from  '../redux'
 
-function IceCreamContainer(props){
+function NewCakeContainer(props){
+    const [number,setNumber] = useState(1)
+
     return(
         <div>
-            <h4>Number of IceCreams - {props.numOfIceCreams} </h4>
-            <button onClick={props.buyIceCream}>Buy Ice Creams</button>
+            <h4>Number of cakes - {props.numOfCakes} </h4>
+            <input type="text" value={number} onChange={e=> setNumber(e.target.value)}/>
+            <button onClick={()=>props.buyCake(number)}>Buy {number} Cakes</button>
         </div>
     )
 }
@@ -16,7 +19,7 @@ function IceCreamContainer(props){
 // to access redux state into react component
 const mapStateToProps = state => {
     return {
-        numOfIceCreams: state.iceCream.numOfIceCreams
+        numOfCakes: state.cake.numOfCakes
     }
 }
 //step 2
@@ -26,11 +29,11 @@ const mapStateToProps = state => {
 //in this example we mapped dispatching by cake to a prop called `buyCake` this allows us to call `buyCake` as a `props.buyCake`
 const mapDispatchToProps = dispatch => {
     return {
-        buyIceCream: () => dispatch(buyIceCream())
+        buyCake: number => dispatch(buyCake(number))
     }
 }
 
 //step1 and step2 are possible becoz of connect() function from react-redux
 // connect() connects react component with redux store
-//in our example it connects IceCreamContainer with redux store
-export default connect(mapStateToProps,mapDispatchToProps)(IceCreamContainer)
+//in our example it connects NewCakeContainer with redux store
+export default connect(mapStateToProps,mapDispatchToProps)(NewCakeContainer)

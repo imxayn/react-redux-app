@@ -5,7 +5,6 @@ import {buyCake} from  '../redux'
 function CakeContainer(props){
     return(
         <div>
-            {console.log(props)}
             <h4>Number of cakes - {props.numOfCakes} </h4>
             <button onClick={props.buyCake}>Buy Cake</button>
         </div>
@@ -16,7 +15,6 @@ function CakeContainer(props){
 //mapStateToProps
 // to access redux state into react component
 const mapStateToProps = state => {
-    console.log(state,'mapStateToProps')
     return {
         numOfCakes: state.cake.numOfCakes
     }
